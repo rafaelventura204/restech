@@ -1,11 +1,8 @@
-
-
 'use client';
 import './globals.css'
-import { OscillometryData } from '@/models/oscillometryData';
 import { Patient } from '@/models/patient';
-import { redirect, useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 export default function Home() {
 
@@ -29,12 +26,9 @@ export default function Home() {
     }
   }
 
-  //quando viene fatto click su 'cerca' ricarichiamo i dati
   function onSubmit(event: FormEvent<HTMLFormElement>) {
-    console.log('onSubmit no chiamataaaaaaaaa')
     event.preventDefault();
     router.push(`http://localhost:3000/oscillometry?Id=${inputFieldValue}`)
-    //redirect(`http://localhost:3000/oscillometry?Id=${inputFieldValue}`)
   }
 
   function onInputChange(event: ChangeEvent<HTMLInputElement>) {

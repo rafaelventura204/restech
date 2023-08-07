@@ -3,7 +3,7 @@ export interface OscillometryData {
     Pred: number;
     LLN: number;
     ULN: number;
-    BMI: number; //TODO: controllare questa forzatura
+    BMI: number;
 
     //attributi specifici di ogni caso
     ins: OscillometryCaseData; //inspirazione
@@ -15,5 +15,5 @@ export interface OscillometryData {
 export interface OscillometryCaseData {
     Baseline: string; //è il valore di Rrs_ins, Rrs_exp o Rrs_tot
     "Z-score": number;
-    "%Pred": number | null; //TODO: controllare questa forzatura, cioè di far accettare number oppure null, è giusto?
+    "%Pred": number;
 }

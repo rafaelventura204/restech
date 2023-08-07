@@ -1,8 +1,7 @@
 'use client';
-import { OscillometryData } from '@/models/oscillometryData';
 import { Patient } from '@/models/patient';
 import { useSearchParams } from 'next/navigation';
-import { FormEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
 
@@ -29,7 +28,7 @@ export default function Home() {
         }
     }
 
-    //restituisce il colore da visualizzare il base allo zscore
+    //restituisce il colore da visualizzare in base allo zscore
     function getAnomalyStatusColor(zscore: number): string {
         if (zscore > 1.64) return 'red';
         return 'white'
@@ -55,7 +54,6 @@ export default function Home() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {oscillometryData.map((row) => ( */}
                     {patient &&
                         <tr key={patient.Id}>
                             <td>{patient.Name}</td>
@@ -67,7 +65,6 @@ export default function Home() {
                             {<td>{patient.OscillometryData.BMI} kg/m²</td>}
                         </tr>
                     }
-                    {/* ))} */}
                 </tbody>
             </table>
 

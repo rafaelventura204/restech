@@ -1,16 +1,9 @@
 import { loadDB } from "@/functions";
 import { NextRequest, NextResponse } from "next/server";
-import { NextApiRequest, NextApiResponse } from "next";
 import { Patient } from "@/models/patient";
 
 export async function GET(request: NextRequest) {
-  // res: NextResponse
-  //non serve controllare, siamo sicuri che il metodo sia GET
-  // if (request.method !== 'GET') {
-  //     return NextResponse.error()//return res.status(405).end();
-  // }
 
-  //Controlliamo che il parametro Id esista
   if (!request.nextUrl.searchParams.has("Id"))
     return NextResponse.json({
       error: "params Id is required",
@@ -27,13 +20,14 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({
         error: "Paziente non trovato",
       });
+
     //Restituiamo il paziente
     return NextResponse.json(patient);
+
   } catch (error) {
     console.error("Error processing oscillometry data:", error);
     return NextResponse.json({
-      error: error, //da rivedere
+      error: error,
     });
-    //return res.status(500).json({ error: 'Internal Server Error' });
   }
 }
