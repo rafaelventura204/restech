@@ -1,7 +1,10 @@
 'use client';
+
+import '@/app/globals.css';
 import { Patient } from '@/models/patient';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+
 
 export default function Home() {
 
@@ -11,7 +14,7 @@ export default function Home() {
     const params = useSearchParams();
 
     useEffect(() => {
-        fetchData()
+        fetchData();
     }, [])
 
     async function fetchData() {
@@ -30,47 +33,46 @@ export default function Home() {
 
     //restituisce il colore da visualizzare in base allo zscore
     function getAnomalyStatusColor(zscore: number): string {
-        if (zscore > 1.64) return 'red';
+        if (zscore > 1.64) return '#f24b4b';
         return 'white'
     }
 
-
     return (
-        <div>
-            <h1>Oscillometry Data</h1>
+        <div id="main_container">
+            {patient ? (
+                <>
+                    <div id="space_btw_block"></div>
+                    <div id="table_name" style={{ top: '7%', left: '20%', }}>Patient Information</div>
+                    <div style={{ display: "grid", gridTemplateColumns: "auto auto", border: "solid", width: "80%", padding: '10px' }}>
+                        <div>
+                            <p style={{ color: 'blue' }}><strong style={{ color: 'black' }}>Name:</strong> {patient.Name} {patient.Surname}</p>
+                            <p><strong>Sex:</strong> {patient.Sex}</p>
+                            <p><strong>Age:</strong> {patient.Age}</p>
+                        </div>
+                        <div>
+                            <p><strong>Height:</strong> {patient.Height} cm ({Math.ceil(patient.Height / 2.54)} in)</p>
+                            <p><strong>Weight:</strong> {patient.Weight} kg ({Math.ceil(patient.Weight / 0.45)} lb)</p>
+                            <p><strong>BMI:</strong> {patient.OscillometryData.BMI} kg/m²</p>
+                        </div>
+                    </div>
+                </>
+            ) : (
+                <p>No patient information available.</p>
+            )}
+            <div id="space_btw_block"></div>
+            <div id="table_name" style={{ top: '32%', left: '20%' }}>
+                Oscillometry
+            </div>
 
-            {/* Table 1: Patient Information */}
-            <h2>Patient Information</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Sex</th>
-                        <th>Age</th>
-                        <th>Height</th>
-                        <th>Weight</th>
-                        <th>BMI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {patient &&
-                        <tr key={patient.Id}>
-                            <td>{patient.Name}</td>
-                            <td>{patient.Surname}</td>
-                            <td>{patient.Sex}</td>
-                            <td>{patient.Age}</td>
-                            <td>{patient.Height} cm ({Math.ceil(patient.Height / 2.54)} in)</td>
-                            <td>{patient.Weight} kg ({Math.ceil(patient.Weight / 0.45)} lb)</td>
-                            {<td>{patient.OscillometryData.BMI} kg/m²</td>}
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-            {/* Table 2: Oscillometry */}
-            <h2>Oscillometry</h2>
-            <table>
+            <table id="main_table">
+                <colgroup>
+                    <col id="border_colgroup" />
+                    <col id="border_colgroup" />
+                    <col id="border_colgroup" />
+                    <col id="border_colgroup" />
+                    <col id="border_colgroup" />
+                    <col id="border_colgroup" />
+                </colgroup>
                 <thead>
                     <tr>
                         <th></th>
@@ -84,7 +86,7 @@ export default function Home() {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Rrs 5 ins</td>
+                        <td style={{ fontWeight: "bold" }}>Rrs 5 ins</td>
                         <td>{patient?.OscillometryData?.LLN}</td>
                         <td>{patient?.OscillometryData?.Pred}</td>
                         <td>{patient?.OscillometryData?.ULN}</td>
@@ -93,7 +95,7 @@ export default function Home() {
                         <td style={{ backgroundColor: getAnomalyStatusColor(patient?.OscillometryData?.ins['Z-score'] ?? 0) }}>{patient?.OscillometryData?.ins['Z-score']}</td>
                     </tr>
                     <tr>
-                        <td>Rrs 5 exp</td>
+                        <td style={{ fontWeight: "bold" }}>Rrs 5 exp</td>
                         <td>{patient?.OscillometryData?.LLN}</td>
                         <td>{patient?.OscillometryData?.Pred}</td>
                         <td>{patient?.OscillometryData?.ULN}</td>
@@ -102,7 +104,7 @@ export default function Home() {
                         <td style={{ backgroundColor: getAnomalyStatusColor(patient?.OscillometryData?.exp['Z-score'] ?? 0) }}>{patient?.OscillometryData?.exp['Z-score']}</td>
                     </tr>
                     <tr>
-                        <td>Rrs 5 tot</td>
+                        <td style={{ fontWeight: "bold" }}>Rrs 5 tot</td>
                         <td>{patient?.OscillometryData?.LLN}</td>
                         <td>{patient?.OscillometryData?.Pred}</td>
                         <td>{patient?.OscillometryData?.ULN}</td>

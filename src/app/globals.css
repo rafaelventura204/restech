@@ -1,7 +1,42 @@
 td{
-
     padding-right: 60px;
     padding-left: 60px;
     border: 2px solid black;
-    
+}
+
+th {
+    background-color: gray; 
+    font-weight: bold;
+}
+
+#main_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+}
+
+#table_name {
+    background-color: #a2bd42; 
+    font-size: 15px;
+    color: black; 
+    font-weight: bold; 
+    padding: 4px 8px; 
+    position: absolute;
+    z-index: 1;
+}
+
+#space_btw_block {
+    height: 60px;
+}
+
+#main_table {
+    border-collapse: collapse;
+    border: solid; 
+    width: 80%; 
+    font-size:  19px;
+}
+
+#border_colgroup {
+    border-right: solid; 
 }
